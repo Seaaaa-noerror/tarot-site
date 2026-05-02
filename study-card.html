@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>牌面学习</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="subpage-shell">
+        <header class="subpage-hero">
+            <div>
+                <p id="study-card-group" class="eyebrow">Tarot Card</p>
+                <h1 id="study-card-title">牌面学习</h1>
+                <p id="study-card-subtitle" class="hero-copy">这里会展示这张牌的解释和你的学习记录。</p>
+            </div>
+            <nav class="subpage-nav">
+                <a class="text-btn nav-light-btn" href="study.html">返回学习页</a>
+                <a class="text-btn nav-light-btn" href="journal.html">去日记页</a>
+                <a class="text-btn nav-light-btn" href="index.html">返回抽牌首页</a>
+            </nav>
+        </header>
+
+        <section class="panel workspace-panel study-card-detail-layout">
+            <article class="detail-image-card study-card-art-card">
+                <img id="study-card-image" class="detail-image" src="" alt="塔罗牌面">
+                <p id="study-card-image-meta" class="detail-card-name">牌名</p>
+            </article>
+
+            <div class="study-card-copy-stack">
+                <article class="guide-card study-card-copy">
+                    <p class="guide-card-meta">牌面解释</p>
+                    <h2 id="study-card-keywords" class="study-keyword-heading">关键词</h2>
+                    <p id="study-card-explanation"></p>
+                </article>
+
+                <article class="guide-card study-card-copy">
+                    <p class="guide-card-meta">My Notes</p>
+                    <h2>我的学习记录</h2>
+                    <label class="field">
+                        <span>写下你对这张牌的理解</span>
+                        <textarea id="study-card-record" rows="8" placeholder="可以写关键词、画面观察、生活联想、逆位理解、你自己的记忆方法。"></textarea>
+                    </label>
+                    <p id="study-card-feedback" class="inline-feedback" aria-live="polite"></p>
+                    <div class="action-row compact-actions">
+                        <button id="study-card-save" class="draw-btn" type="button">保存学习记录</button>
+                        <button id="study-card-clear" class="secondary-btn" type="button">清空输入</button>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </div>
+
+    <script src="workspace.js"></script>
+</body>
+</html>

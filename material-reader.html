@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>素材内容定位</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="subpage-shell">
+        <header class="subpage-hero">
+            <div>
+                <p class="eyebrow">Material Reader</p>
+                <h1>素材内容定位</h1>
+                <p class="hero-copy">从日记页命中的素材片段跳转到这里，自动高亮并定位到对应的可检索正文位置。</p>
+            </div>
+            <nav class="subpage-nav">
+                <a class="text-btn nav-light-btn" href="journal.html">返回日记页</a>
+                <a class="text-btn nav-light-btn" href="language.html">返回素材库</a>
+                <a class="text-btn nav-light-btn" href="index.html">返回抽牌首页</a>
+            </nav>
+        </header>
+
+        <section class="panel workspace-panel">
+            <div id="material-reader-status" class="empty-list">正在读取素材文字索引...</div>
+
+            <article id="material-reader-card" class="guide-card material-reader-card hidden">
+                <p id="material-reader-source" class="guide-card-meta">素材来源</p>
+                <h2 id="material-reader-title">素材标题</h2>
+                <p id="material-reader-description"></p>
+
+                <div id="material-reader-actions" class="card-actions material-reader-actions"></div>
+
+                <div class="material-reader-search">
+                    <label class="field">
+                        <span>在当前素材来源中重新定位</span>
+                        <input id="material-reader-search" type="text" placeholder="输入要查找的词">
+                    </label>
+                    <button id="material-reader-search-btn" class="secondary-btn" type="button">定位</button>
+                </div>
+
+                <p id="material-reader-note" class="reference-note"></p>
+                <div id="material-reader-text" class="material-reader-text"></div>
+            </article>
+        </section>
+    </div>
+
+    <script src="workspace.js"></script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>塔罗牌详细解读</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="detail-wrapper">
+        <div class="detail-head">
+            <div>
+                <p class="eyebrow">Card Detail</p>
+                <h1>塔罗牌详细解读</h1>
+            </div>
+            <p id="detail-meta" class="detail-meta">详细信息</p>
+        </div>
+
+        <div class="detail-grid">
+            <section class="panel detail-image-card">
+                <img id="detail-image" class="detail-image" alt="">
+            </section>
+
+            <section class="detail-stack">
+                <section class="panel detail-layout">
+                    <p id="detail-position" class="position-label"></p>
+                    <h2 id="detail-name" class="detail-card-name"></h2>
+                    <p id="detail-keywords"></p>
+                    <p id="detail-question"></p>
+                </section>
+
+                <section class="detail-block">
+                    <strong>结合问题的解读：</strong>
+                    <p id="detail-meaning"></p>
+                </section>
+
+                <section class="detail-block">
+                    <strong>画面细节解读：</strong>
+                    <p id="detail-symbolism"></p>
+                </section>
+
+                <section class="detail-block">
+                    <strong>建议：</strong>
+                    <p id="detail-advice"></p>
+                </section>
+
+                <section class="detail-block">
+                    <strong>本次阅读提示：</strong>
+                    <ul id="detail-points" class="detail-list"></ul>
+                </section>
+
+                <a class="back-link" href="index.html">返回牌阵</a>
+            </section>
+        </div>
+    </div>
+
+    <script src="detail.js"></script>
+</body>
+</html>

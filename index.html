@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarot Atelier 本地塔罗抽牌</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="usage-modal" class="usage-modal hidden" aria-hidden="true">
+        <div class="usage-modal-backdrop" data-close-usage="true"></div>
+        <div class="usage-modal-card" role="dialog" aria-modal="true" aria-labelledby="usage-modal-title">
+            <p class="eyebrow">How To Use</p>
+            <h2 id="usage-modal-title">使用说明</h2>
+            <div class="usage-modal-body">
+                <p>1. 在左侧输入你想问的问题，选择抽牌数量，然后点击“开始抽牌”。</p>
+                <p>2. 从展开的 15 张背面牌里拖动你想抽的牌到抽牌区，抽满后会自动生成解读。</p>
+                <p>3. 结果区可以点击单张牌查看详情，也可以把本次阅读保存到日记。</p>
+                <p>4. 右上角按钮可以进入学习页、日记页和语言素材库，分别用于学习记录、复盘和资料整理。</p>
+                <p>5. 所有记录默认保存在当前浏览器本地，不会自动上传到外部服务。</p>
+            </div>
+            <div class="usage-modal-actions">
+                <button id="usage-modal-close" class="draw-btn" type="button">我知道了，开始使用</button>
+            </div>
+        </div>
+    </div>
+    <div class="page-shell">
+        <header class="hero hero-home">
+            <div class="hero-top">
+                <div class="hero-title-wrap">
+                    <p class="eyebrow">Tarot Atelier</p>
+                    <h1>本地塔罗抽牌工作台</h1>
+                </div>
+                <nav class="hero-nav" aria-label="功能页面导航">
+                    <a class="hero-nav-btn" href="study.html">学习塔罗干货</a>
+                    <a class="hero-nav-btn" href="journal.html">日记记录回顾</a>
+                    <a class="hero-nav-btn" href="language.html">塔罗语言学习素材库</a>
+                </nav>
+            </div>
+            <p class="hero-copy">输入问题完成抽牌，查看牌面解读；学习、记录和语言素材库则分别进入独立页面使用。</p>
+        </header>
+
+        <main class="layout">
+            <section class="panel control-panel">
+                <h2>开始抽牌</h2>
+                <label class="field">
+                    <span>你的问题或需求</span>
+                    <textarea id="question" rows="4" placeholder="例如：我最近适合换工作吗？这段关系接下来会怎么发展？我应该如何安排学习节奏？"></textarea>
+                </label>
+
+                <div class="field">
+                    <span>灵感问题</span>
+                    <div class="preset-head">
+                        <small>可以直接点选一个问题，也可以刷新换一批。</small>
+                        <button id="refresh-prompts-btn" class="mini-btn" type="button" aria-label="刷新问题" title="刷新问题">↻</button>
+                    </div>
+                    <div id="prompt-options" class="prompt-options"></div>
+                </div>
+
+                <div class="field">
+                    <span>抽牌数量</span>
+                    <div class="quick-counts">
+                        <button class="chip" data-count="1" type="button">1 张</button>
+                        <button class="chip" data-count="3" type="button">3 张</button>
+                        <button class="chip" data-count="5" type="button">5 张</button>
+                    </div>
+                    <input id="card-count" type="number" min="1" max="7" value="3">
+                    <small>支持 1 到 7 张，结果不会重复抽到同一张牌。</small>
+                </div>
+
+                <div class="action-row">
+                    <button id="draw-btn" class="draw-btn" type="button">开始抽牌</button>
+                    <button id="shuffle-btn" class="secondary-btn" type="button">洗牌换一组</button>
+                </div>
+                <p id="selection-hint" class="selection-hint">点击“开始抽牌”后，会从完整 78 张塔罗里展开 15 张背面牌。把想抽的牌拖到抽牌区，不满意就洗牌换另一组 15 张。</p>
+            </section>
+
+            <section class="panel result-panel">
+                <div class="result-head">
+                    <div>
+                        <p class="eyebrow">Reading Result</p>
+                        <h2>你的牌阵</h2>
+                    </div>
+                    <p id="result-meta" class="result-meta">尚未抽牌</p>
+                </div>
+
+                <div id="summary" class="summary empty-state">
+                    输入问题后点击“开始抽牌”。系统会从完整 78 张塔罗中展示 15 张背面牌，你可以通过拖动背面牌完成抽取；若想换一组，再点击“洗牌换一组”。
+                </div>
+
+                <div class="result-toolbar">
+                    <button id="save-reading-btn" class="secondary-btn" type="button">保存本次阅读到日记</button>
+                    <button id="use-reading-in-diary-btn" class="secondary-btn" type="button">带入日记页内容</button>
+                </div>
+                <p id="reading-save-feedback" class="save-feedback" aria-live="polite"></p>
+
+                <section id="selection-stage" class="selection-stage hidden" aria-live="polite">
+                    <div class="selection-stage-head">
+                        <div>
+                            <p class="eyebrow">Interactive Draw</p>
+                            <h3>请从扇形牌阵中拖动背面牌</h3>
+                        </div>
+                        <p id="selection-meta" class="result-meta">尚未开始</p>
+                    </div>
+                    <p id="selection-progress" class="selection-progress"></p>
+                    <div id="selection-pool" class="selection-fan"></div>
+                    <div id="selection-dropzone" class="selection-dropzone">
+                        <p class="selection-drop-title">抽牌区</p>
+                        <p id="selection-droptext" class="selection-droptext">把背面牌拖到这里完成抽取</p>
+                        <div id="selection-picked" class="selection-picked"></div>
+                    </div>
+                </section>
+
+                <div id="cards" class="cards-grid"></div>
+            </section>
+        </main>
+    </div>
+
+    <template id="card-template">
+        <article class="tarot-card" tabindex="0">
+            <div class="card-visual-wrap">
+                <img class="card-visual" alt="">
+                <span class="orientation-badge"></span>
+            </div>
+            <div class="card-caption">
+                <p class="position-label"></p>
+                <h3 class="card-name"></h3>
+            </div>
+            <div class="card-preview">
+                <p class="preview-title"></p>
+                <p class="preview-keywords"></p>
+                <p class="preview-meaning"></p>
+                <p class="preview-advice"></p>
+            </div>
+        </article>
+    </template>
+
+    <script src="app.js"></script>
+</body>
+</html>

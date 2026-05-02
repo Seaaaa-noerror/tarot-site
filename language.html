@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>塔罗语言学习素材库</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="usage-modal" class="usage-modal hidden" aria-hidden="true">
+        <div class="usage-modal-backdrop" data-close-usage="true"></div>
+        <div class="usage-modal-card" role="dialog" aria-modal="true" aria-labelledby="usage-modal-title">
+            <p class="eyebrow">How To Use</p>
+            <h2 id="usage-modal-title">语言素材库使用说明</h2>
+            <div class="usage-modal-body">
+                <p>1. 上方保留一个语言示例，方便你理解这一页适合收集什么内容。</p>
+                <p>2. 点击“添加内容”后，只需要输入资料标题并上传 EPUB、PDF 等文件。</p>
+                <p>3. 保存时会自动提取可读文字建立索引，之后日记页会按内容实时匹配相关片段。</p>
+                <p>4. 文件保存在当前浏览器本地的 IndexedDB 中，换浏览器或清缓存可能会丢失。</p>
+            </div>
+            <div class="usage-modal-actions">
+                <button id="usage-modal-close" class="draw-btn" type="button">开始整理资料</button>
+            </div>
+        </div>
+    </div>
+    <div class="subpage-shell">
+        <header class="subpage-hero">
+            <div>
+                <p class="eyebrow">Language Bank</p>
+                <h1>塔罗语言学习素材库</h1>
+                <p class="hero-copy">这里既保留一个语言示例，也支持你上传并保存 EPUB、PDF 等资料文件，作为自己的塔罗学习素材库。</p>
+            </div>
+            <nav class="subpage-nav">
+                <a class="text-btn nav-light-btn" href="index.html">返回抽牌首页</a>
+                <a class="text-btn nav-light-btn" href="study.html">去学习干货</a>
+                <a class="text-btn nav-light-btn" href="journal.html">去日记页</a>
+            </nav>
+        </header>
+
+        <section class="panel workspace-panel">
+            <div class="section-head">
+                <div>
+                    <p class="eyebrow">Example</p>
+                    <h2>语言素材示例</h2>
+                </div>
+            </div>
+            <article class="knowledge-card language-example-card">
+                <div class="language-term">
+                    <strong>The Hermit</strong>
+                    <span class="tag">隐者</span>
+                </div>
+                <p><strong>例句：</strong>The Hermit often points to solitude, reflection, and inner guidance.</p>
+                <p><strong>拆解：</strong>这句话适合用来练习“牌名 + 常见主题 + 解读动词”的表达方式，也适合写进你的双语塔罗笔记。</p>
+            </article>
+        </section>
+
+        <section class="panel workspace-panel">
+            <div class="section-head">
+                <div>
+                    <p class="eyebrow">Materials</p>
+                    <h2>资料文件收藏</h2>
+                </div>
+                <button id="toggle-language-add" class="secondary-btn section-btn" type="button">添加内容</button>
+            </div>
+
+            <form id="language-form" class="stack-form compact-form hidden">
+                <label class="field">
+                    <span>资料标题</span>
+                    <input id="language-title" type="text" placeholder="例如：塔罗入门电子书">
+                </label>
+                <label class="field">
+                    <span>上传文件</span>
+                    <input id="language-file" type="file" multiple accept=".epub,.pdf,.txt,.md,.doc,.docx,.png,.jpg,.jpeg,.webp">
+                    <small>支持 EPUB、PDF、TXT、Markdown、Word、图片等常见学习资料；保存时会自动建立可检索文字索引。</small>
+                </label>
+                <button class="secondary-btn" type="submit">保存到素材库</button>
+            </form>
+
+            <div id="language-library-list" class="list-stack"></div>
+        </section>
+    </div>
+
+    <script src="workspace.js"></script>
+</body>
+</html>
