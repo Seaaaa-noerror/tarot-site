@@ -1,0 +1,16 @@
+.vercel/
+node_modules/
+dist/
+build/
+
+.env
+.env.*
+*.log
+
+# Keep large/private study materials local unless you intentionally add them.
+*.epub
+*.pdf
+*.doc
+*.docx
+*.ppt
+*.pptx
